@@ -27,12 +27,10 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:timestamp",function (req,res){
   let timestamp = req.params.timestamp;
   let nd = new Date(timestamp);
-  res.json({"unix": nd.valueOf(),"utc": nd.toString() });
+  res.json({"unix": nd.valueOf(),"utc": nd.setUTCDate() });
 });
 
-app.get("/api/:unix", function(req,res){
-  console.log("Hello World")
-});
+
 
 
 // listen for requests :)
