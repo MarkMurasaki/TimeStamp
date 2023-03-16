@@ -38,10 +38,9 @@ app.get("/api/:timestamp",function (req,res){
     res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
   }else{
     nd = parseInt(timestamp)
-    res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
+    res.json({"unix": new Date(nd).getTime(),"utc": new Date(nd).toUTCString() });
   }
 });
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
