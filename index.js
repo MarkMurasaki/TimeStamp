@@ -42,7 +42,7 @@ app.get("/api/:timestamp/",function (req,res){
       res.json({ error: "Invalid Date" });
     } else {
       nd = parseInt(timestamp)
-      res.json({"unix": new Date(timestamp).getTime(),"utc": new Date(nd).toUTCString() });
+      res.json({"unix": new Date(nd).getTime(),"utc": new Date(nd).toUTCString() });
     }
   }
 });
