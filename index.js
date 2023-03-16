@@ -34,15 +34,16 @@ app.get("/api/",function (req,res){
 
 app.get("/api/:timestamp/",function (req,res){
   let timestamp = req.params.timestamp;
-  if(timestamp.includes('-')){
+  let testRegex1 = /\d{4}[-]\d{2}[-]\d{2}|\s/;
+  let testRegex2 = /\d{10}/;
+  if(testRegex1.test(timestamp)){
     res.json({"unix": new Date(timestamp).getTime(),"utc": new Date(timestamp).toUTCString() });
   }else{
-    let dateObject = new Date(timestamp);
-    if (dateObject.toString() !== "Invalid Date") {
-      res.json({ error: "Invalid Date" });
-    } else {
+    if (testRegex2.test(timestamp)) {
       nd = parseInt(timestamp)
       res.json({"unix": new Date(nd).getTime(),"utc": new Date(nd).toUTCString() });
+    } else {
+      res.json({ error: "Invalid Date" });
     }
   }
 });
