@@ -26,8 +26,8 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:timestamp",function (req,res){
   let timestamp = req.params.timestamp;
-  let nd = new Date(timestamp);
-  res.json({"unix": nd.valueOf(),"utc": nd.setUTCDate.toString() });
+  let nd = new Date.prototype.setUTCDate(timestamp);
+  res.json({"unix": nd.valueOf(),"utc": nd.toString() });
 });
 
 
