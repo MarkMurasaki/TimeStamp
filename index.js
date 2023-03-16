@@ -33,8 +33,13 @@ app.get("/api/",function (req,res){
 
 app.get("/api/:timestamp",function (req,res){
   let timestamp = req.params.timestamp;
-  let nd = new Date(timestamp);
-  res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
+  if(timestamp.includes('-')){
+    let nd = new Date(timestamp);
+    res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
+  }else{
+    timestamp = parseInt(timestamp)
+    res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
+  }
 });
 
 
