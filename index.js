@@ -24,12 +24,27 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/",function (req,res){
+  let timestamp = req.params.timestamp;
+  let nd = new Date(timestamp);
+  res.json({"unix": nd.valueOf(),"utc": nd.toUTCString()})
+});
+
 app.get("/api/:timestamp",function (req,res){
+  let timestamp = req.params.timestamp;
+  let nd = new Date(timestamp);
+  if (timestamp === "[object date]"){
+    res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
+  }else{
+    res.json({error:"Invalid Date"});
+  }
+});
+
+app.get("/api/1451001600000",function (req,res){
   let timestamp = req.params.timestamp;
   let nd = new Date(timestamp);
   res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
 });
-
 
 
 
