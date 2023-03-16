@@ -37,7 +37,7 @@ app.get("/api/:timestamp",function (req,res){
     let nd = new Date(timestamp);
     res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
   }else{
-    timestamp = parseInt(timestamp)
+    nd = parseInt(timestamp)
     res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
   }
 });
