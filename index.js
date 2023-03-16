@@ -33,10 +33,7 @@ app.get("/api/",function (req,res){
 app.get("/api/:timestamp",function (req,res){
   let timestamp = req.params.timestamp;
   let nd = new Date(timestamp);
-  if (timestamp !== 'Invalid Date'){
-    res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
-  }
-  res.json({error:'Invalid Date'});
+  res.json({"unix": nd.valueOf(),"utc": nd.toUTCString() });
 });
 
 app.get("/api/1451001600000",function (req,res){
