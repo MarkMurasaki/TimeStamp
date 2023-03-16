@@ -26,19 +26,24 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/",function (req,res){
-  let timestamp = req.params.timestamp;
-  let nd = new Date(timestamp);
-  res.json({"unix": nd.valueOf(),"utc": nd.toUTCString()})
+    let date = new Date();
+    let UTC = date.toUTCString();
+    let UNIX = date.getTime();
+    res.json({ unix: UNIX, utc: UTC });
 });
 
-
-app.get("/api/:timestamp",function (req,res){
+app.get("/api/:timestamp/",function (req,res){
   let timestamp = req.params.timestamp;
   if(timestamp.includes('-')){
-    res.json({"unix": new Date(timestamp).getTime(),"utc": new Date(timestamp).toUTCString() });;
+    res.json({"unix": new Date(timestamp).getTime(),"utc": new Date(timestamp).toUTCString() });
   }else{
-    nd = parseInt(timestamp)
-    res.json({"unix": new Date(nd).getTime(),"utc": new Date(nd).toUTCString() });
+    let dateObject = new Date(timestamp);
+    if (dateObject.toString() !== "Invalid Date") {
+      res.json({ error: "Invalid Date" });
+    } else {
+      nd = parseInt(timestamp)
+      res.json({error,"utc": new Date(nd).toUTCString() });
+    }
   }
 });
 
